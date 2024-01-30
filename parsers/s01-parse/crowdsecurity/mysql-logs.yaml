@@ -3,7 +3,7 @@ name: crowdsecurity/mysql-logs
 description: "Parse MySQL logs"
 filter: "evt.Parsed.program == 'mysql'"
 pattern_syntax:
-  MYSQL_ACCESS_DENIED: "Access denied for user '%{DATA:user}'@'%{IP:source_ip}' \\(using password: %{WORD:using_password}\\)" 
+  MYSQL_ACCESS_DENIED: "Access denied for user '%{DATA:user}'@'%{IPORHOSTNAME:source_ip}' \\(using password: %{WORD:using_password}\\)" 
 nodes:
   - grok:
       pattern: "%{TIMESTAMP_ISO8601:time} %{NUMBER} \\[Note\\]( \\[%{DATA:err_code}\\] \\[%{DATA:subsystem}\\])? %{MYSQL_ACCESS_DENIED}"
